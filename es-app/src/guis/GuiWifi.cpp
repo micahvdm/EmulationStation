@@ -54,8 +54,8 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 			std::shared_ptr<GuiComponent> password;
 
 			// bring down wireless to refresh
-			system("sudo ifconfig wlan0 down");
-			system("sudo ifconfig wlan0 up");
+			//system("sudo ifconfig wlan0 down");
+			//system("sudo ifconfig wlan0 up");
 
 			// dump iwlist into a memory file
 			FILE *fp;
@@ -192,7 +192,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 
 			// Specific Linux commands. 
 			iwList = popen("iwlist wlan0 scanning | grep 'ESSID\\|Frequency\\|Channel\\|IEEE\\|Quality'", "r");
-			wIPP = popen("ifconfig wlan0 | grep 'inet'", "r");
+			wIPP = popen("ifconfig wlan0 | grep 'inet addr'", "r");
 
 			// Variables
 			std::string wSSID;
@@ -237,7 +237,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 				currentLine = wip;
 
 				// find location of ipv4 address
-				found = currentLine.find("inet");
+				found = currentLine.find("inet addr");
 				if (found != std::string::npos) {
 					// Format string to rip out uneeded data
 					wIP = currentLine;
@@ -288,7 +288,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 			currentLine = wip;
 
 			// find location of ipv4 address
-			found = currentLine.find("inet");
+			found = currentLine.find("inet addr");
 			if (found != std::string::npos) {
 				// Format string to rip out uneeded data
 				wIP = currentLine;
