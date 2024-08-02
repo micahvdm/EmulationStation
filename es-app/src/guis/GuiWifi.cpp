@@ -60,7 +60,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 			// dump iwlist into a memory file
 			FILE *fp;
 			char path[1035];
-			fp = popen("sudo iwlist wlan0 scanning | grep 'SSID\\|Channel:\\|Encryption\\|Quality'", "r");
+			fp = popen("sudo iwlist wlan0 scanning | grep 'ESSID\\|Channel:\\|Encryption\\|Quality'", "r");
 
 			// Variables
 			std::string wSSID[24];
@@ -191,8 +191,8 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 			char wip[1035];
 
 			// Specific Linux commands. 
-			iwList = popen("iwlist wlan0 scanning | grep 'SSID\\|Frequency\\|Channel\\|IEEE\\|Quality'", "r");
-			wIPP = popen("ifconfig wlan0 | grep 'inet addr'", "r");
+			iwList = popen("iwlist wlan0 scanning | grep 'ESSID\\|Frequency\\|Channel\\|IEEE\\|Quality'", "r");
+			wIPP = popen("ifconfig wlan0 | grep 'inet'", "r");
 
 			// Variables
 			std::string wSSID;
@@ -237,12 +237,12 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 				currentLine = wip;
 
 				// find location of ipv4 address
-				found = currentLine.find("inet addr");
+				found = currentLine.find("inet");
 				if (found != std::string::npos) {
 					// Format string to rip out uneeded data
 					wIP = currentLine;
 					wIP = wIP.substr(found + 10, 42);
-					int trimBcast = wIP.find("Bcast");
+					int trimBcast = wIP.find("broadcast");
 					wIP = wIP.substr(0, trimBcast - 1);
 				}
 			}
@@ -288,12 +288,12 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 			currentLine = wip;
 
 			// find location of ipv4 address
-			found = currentLine.find("inet addr");
+			found = currentLine.find("inet");
 			if (found != std::string::npos) {
 				// Format string to rip out uneeded data
 				wIP = currentLine;
 				wIP = wIP.substr(found + 10, 42);
-				int trimBcast = wIP.find("Bcast");
+				int trimBcast = wIP.find("broadcast");
 				wIP = wIP.substr(0, trimBcast - 2);
 			}
 
@@ -322,7 +322,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 		auto show_mac = std::make_shared<TextComponent>(mWindow, "" + wMac, Font::get(FONT_SIZE_MEDIUM), 0x777777FF);
 		s->addWithLabel("MAC", show_mac);
 
-		auto show_data = std::make_shared<TextComponent>(mWindow, "" + wRX + "\n     " + wTX + ")", Font::get(FONT_SIZE_MEDIUM), 0x777777FF);
+		auto show_data = std::make_shared<TextComponent>(mWindow, "" + wRX + "\n     " + wTX + "", Font::get(FONT_SIZE_MEDIUM), 0x777777FF);
 		show_data->setHorizontalAlignment(ALIGN_CENTER);
 		s->addWithLabel("DATA", show_data);
 
