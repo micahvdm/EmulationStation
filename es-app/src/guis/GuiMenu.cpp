@@ -9,6 +9,7 @@
 #include "guis/GuiMsgBox.h"
 #include "guis/GuiScraperStart.h"
 #include "guis/GuiSettings.h"
+#include "guis/GuiWifi.h"
 #include "views/UIModeController.h"
 #include "views/ViewController.h"
 #include "CollectionSystemManager.h"
@@ -34,6 +35,9 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
 		addEntry("GAME COLLECTION SETTINGS", 0x777777FF, true, [this] { openCollectionSystemSettings(); });
 		addEntry("OTHER SETTINGS", 0x777777FF, true, [this] { openOtherSettings(); });
 		addEntry("CONFIGURE INPUT", 0x777777FF, true, [this] { openConfigInput(); });
+		addEntry("NETWORK SETTINGS", 0x777777FF, true, [this, window] {
+				mWindow->pushGui(new GuiWifi(mWindow));
+		});
 	} else {
 		addEntry("SOUND SETTINGS", 0x777777FF, true, [this] { openSoundSettings(); });
 	}
