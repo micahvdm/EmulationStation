@@ -5,8 +5,7 @@
 #include "Settings.h"
 #include "guis/GuiMsgBox.h"
 #include "guis/GuiSettings.h"
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -133,7 +132,7 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 
 			// Make sure wificonnect exists
 			std::string path = Utils::FileSystem::getHomePath() + "/.emulationstation/app/wifi/wificonnect";
-			if (boost::filesystem::exists(path)) {
+			if (std::filesystem::exists(path)) {
 				system(cmd);
 				mConnected = true;
 			} else {
