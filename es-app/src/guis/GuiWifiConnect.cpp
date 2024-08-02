@@ -132,7 +132,7 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 
 			// Make sure wificonnect exists
 			std::string path = Utils::FileSystem::getHomePath() + "/.emulationstation/app/wifi/wificonnect";
-			if (boost::filesystem::exists(path s)) {
+			if (boost::filesystem::exists(path)s) {
 				system(cmd);
 				mConnected = true;
 			} else {
