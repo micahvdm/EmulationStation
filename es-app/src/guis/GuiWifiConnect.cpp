@@ -5,7 +5,7 @@
 #include "Settings.h"
 #include "guis/GuiMsgBox.h"
 #include "guis/GuiSettings.h"
-
+#include <boost/filesystem/path.hpp>
 #include <boost/filesystem.hpp>
 #include <iostream>
 #include <fstream>
