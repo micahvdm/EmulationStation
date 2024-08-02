@@ -159,7 +159,7 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 	mVersion.setFont(Font::get(FONT_SIZE_SMALL));
 	mVersion.setColor(0x0044FFFF);
 	mVersion.setText("GUIWIFI");
-	mVersion.setAlignment(ALIGN_CENTER);
+	mVersion.setHorizontalAlignment(ALIGN_CENTER);
 
 	addChild(&mMenu);
 	addChild(&mVersion);
