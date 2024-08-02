@@ -163,7 +163,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 
 				// Create signal graph, and align it to the right.
 				auto signal_comp = std::make_shared<TextComponent>(mWindow, "" + sigText, Font::get(FONT_SIZE_MEDIUM), color);
-				signal_comp->setAlignment(ALIGN_RIGHT);
+				signal_comp->setHorizontalAlignment(ALIGN_RIGHT);
 				row.addElement(signal_comp, true);
 
 				//Create what to do whne this network is clicked.
@@ -323,7 +323,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 		s->addWithLabel("MAC", show_mac);
 
 		auto show_data = std::make_shared<TextComponent>(mWindow, "" + wRX + "\n     " + wTX + ")", Font::get(FONT_SIZE_MEDIUM), 0x777777FF);
-		show_data->setAlignment(ALIGN_CENTER);
+		show_data->setHorizontalAlignment(ALIGN_CENTER);
 		s->addWithLabel("DATA", show_data);
 
 		mWindow->pushGui(s);
@@ -395,7 +395,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 	mVersion.setFont(Font::get(FONT_SIZE_SMALL));
 	mVersion.setColor(0x0044FFFF);
 	mVersion.setText("GUIWIFI V 0.5 STABLE");
-	mVersion.setAlignment(ALIGN_CENTER);
+	mVersion.setHorizontalAlignment(ALIGN_CENTER);
 
 	addChild(&mMenu);
 	addChild(&mVersion);
