@@ -43,7 +43,7 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 
 	// [version]
 
-	std::string wificonnect_path = getHomePath() + "/.emulationstation/app/wifi/./wificonnect";
+	std::string wificonnect_path = Utils::FileSystem::getHomePath() + "/.emulationstation/app/wifi/./wificonnect";
 
 	addEntry("CONNECT TO NEW WIFI", 0x777777FF, true, 
 		[this, window] { 
