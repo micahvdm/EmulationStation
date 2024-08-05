@@ -11,7 +11,7 @@ GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::st
 	addChild(&mGrid);
 
 	mTitle = std::make_shared<TextComponent>(mWindow, title, Font::get(FONT_SIZE_LARGE), 0x555555FF, ALIGN_CENTER);
-	mKeyboardGrid = std::make_shared<ComponentGrid>(mWindow, Vector2i(10, 5));
+	mKeyboardGrid = std::make_shared<ComponentGrid>(mWindow, Vector2i(12, 5));
 
 	mText = std::make_shared<TextEditComponent>(mWindow);
 	mText->setValue(initValue);
@@ -34,7 +34,7 @@ GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::st
 		std::locale loc;
 
 		// Digit Row & Special Chara.
-		for (int k = 0; k < 10; k++) {
+		for (int k = 0; k < 12; k++) {
 			// Create string for button display name.
 			std::string strName = "";
 			strName += numRow[k];
@@ -55,7 +55,7 @@ GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::st
 		}
 
 		// Top row
-		for (int k = 0; k < 10; k++) {
+		for (int k = 0; k < 12; k++) {
 			kButtons.push_back(std::make_shared<ButtonComponent>
 				(mWindow, topRowUp[k], topRowUp[k], [this, k, loc] {
 				mText->startEditing();
@@ -69,7 +69,7 @@ GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::st
 		}
 
 		// Home Row
-		for (int k = 0; k < 10; k++) {
+		for (int k = 0; k < 12; k++) {
 			auto key = homeRowUp[k];
 			if (k == 9) key = homeRow[k];
 			hButtons.push_back(std::make_shared<ButtonComponent>
@@ -103,7 +103,7 @@ GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::st
 		}
 
 		// Add in the last two manualy because they're special chara [,< and .>]
-		for (int k = 7; k < 9; k++) {
+		for (int k = 7; k < 10; k++) {
 			bButtons.push_back(std::make_shared<ButtonComponent>(mWindow, bottomRow[7], bottomRow[7], [this, k] {
 				mText->startEditing();
 				if (mShift) mText->textInput(bottomRowUp[k]);
@@ -113,7 +113,7 @@ GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::st
 		}
 
 		// Do a sererate for loop because shift key makes it weird
-		for (int k = 0; k < 10; k++) {
+		for (int k = 0; k < 12; k++) {
 			mKeyboardGrid->setEntry(bButtons[k], Vector2i(k, 3), true, false);
 		}
 
