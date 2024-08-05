@@ -37,14 +37,14 @@ private:
 	std::shared_ptr<ComponentGrid> mNewGrid;
 
 	// Define keyboard key rows.
-	const char* numRow[10] = { "1","2","3","4","5","6","7","8","9","0" };
-	const char* numRowUp[10] = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")" };
-	const char* topRow[10] = { "q","w","e","r","t","y","u","i","o","p" };
-	const char* topRowUp[10] = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P" };		// Just so I don't have to deal with toupper
-	const char* homeRow[10] = { "a","s","d","f","g","h","j","k","l",";" };
-	const char* homeRowUp[10] = { "A", "S", "D", "F", "G", "H", "J", "K", "L", ":" };
-	const char* bottomRow[9] = { "z","x","c","v","b","n","m",",","." };						// Shift is handled in the constructor
-	const char* bottomRowUp[9] = { "Z", "X", "C", "V", "B", "N", "M", "<", ">" };
+	const char* numRow[12] = { "1","2","3","4","5","6","7","8","9","0","-","=" };
+	const char* numRowUp[12] = { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")","_","+" };
+	const char* topRow[12] = { "q","w","e","r","t","y","u","i","o","p","[","]" };
+	const char* topRowUp[12] = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P","{","}" };		// Just so I don't have to deal with toupper
+	const char* homeRow[12] = { "a","s","d","f","g","h","j","k","l",";","'","'''" };
+	const char* homeRowUp[12] = { "A", "S", "D", "F", "G", "H", "J", "K", "L", ":",'"', "|" };
+	const char* bottomRow[10] = { "z","x","c","v","b","n","m",",",".","/" };						// Shift is handled in the constructor
+	const char* bottomRowUp[10] = { "Z", "X", "C", "V", "B", "N", "M", "<", ">","?" };
 
 	int mxIndex = 0;		// Stores the X index and makes every grid the same.
 
