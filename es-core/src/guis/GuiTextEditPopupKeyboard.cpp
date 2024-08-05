@@ -5,7 +5,7 @@
 
 GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::string& title, const std::string& initValue,
 	const std::function<void(const std::string&)>& okCallback, bool multiLine, const char* acceptBtnText)
-	: GuiComponent(window), mBackground(window, ":/frame.png"), mGrid(window, Vector2i(1, 7)), mMultiLine(multiLine)
+	: GuiComponent(window), mBackground(window, ":/frame.png"), mGrid(window, Vector2i(1, 9)), mMultiLine(multiLine)
 {
 	addChild(&mBackground);
 	addChild(&mGrid);
@@ -227,8 +227,11 @@ void GuiTextEditPopupKeyboard::shiftKeys() {
 		bButtons[0]->setText("[SHIFT]", "SHIFTS FOR UPPER,LOWER, AND SPECIAL");
 		// Change Special chara
 		hButtons[9]->setText(":", ":");
+		hButtons[10]->setText("\"", "\"");
+		hButtons[11]->setText("|", "|");
 		bButtons[8]->setText("<", "<");
 		bButtons[9]->setText(">", ">");
+		bButtons[10]->setText("?", "?");
 	} else {
 		// UNSHIFTING
 		// Remove button color
@@ -236,8 +239,11 @@ void GuiTextEditPopupKeyboard::shiftKeys() {
 		// Change Special chara
 		bButtons[0]->setText("SHIFT", "SHIFTS FOR UPPER,LOWER, AND SPECIAL");
 		hButtons[9]->setText(";", ";");
+		hButtons[10]->setText("'", "'");
+		hButtons[11]->setText("\\", "\\");
 		bButtons[8]->setText(",", ",");
 		bButtons[9]->setText(".", ".");
+		bButtons[10]->setText("/", "/");
 	}
 
 }
