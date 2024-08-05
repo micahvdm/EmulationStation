@@ -43,13 +43,14 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 			auto updateVal = [ed](const std::string& newVal) { ed->setValue(newVal); }; // ok callback (apply new value to ed)
 
 			// popup the keyboard.
-			if (Settings::getInstance()->getBool("OSK_Enable")) {
-				mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
-			}
-			else
-			{
-				mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
-			}
+			mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			// if (Settings::getInstance()->getBool("OSK_Enable")) {
+			// 	mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			// }
+			// else
+			// {
+			// 	mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			// }
 		});
 	}
 	else {
@@ -59,13 +60,14 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 			auto updateVal = [ed](const std::string& newVal) { ed->setValue(newVal); }; // ok callback (apply new value to ed)
 
 			// popup the keyboard.
-			if (Settings::getInstance()->getBool("OSK_Enable")) {
-				mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
-			}
-			else
-			{
-				mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
-			}
+			mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			// if (Settings::getInstance()->getBool("OSK_Enable")) {
+			// 	mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			// }
+			// else
+			// {
+			// 	mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			// }
 		});
 	}
 
