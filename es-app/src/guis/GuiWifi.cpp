@@ -30,57 +30,6 @@
 #include "components/MenuComponent.h"
 #include "guis/GuiTextEditPopup.h"
 
-// Function to read the SSID from a file
-std::string readSSIDFromFile(const std::string &filename) {
-    std::ifstream file(filename);
-    std::string line;
-    while (std::getline(file, line)) {
-        if (line.find("ssid=") == 0) {  // Check if the line starts with "ssid="
-            return line.substr(5);  // Return the part after "ssid="
-        }
-    }
-    return "";  // Return an empty string if "ssid=" is not found
-}
-
-// Function to process files in a directory and store SSIDs in wip
-void processDirectory(const std::string &directoryPath, char *wip, size_t bufferSize) {
-    DIR *dir;
-    struct dirent *entry;
-    size_t offset = 0;
-
-    if ((dir = opendir(directoryPath.c_str())) != nullptr) {
-        while ((entry = readdir(dir)) != nullptr) {
-            std::string filename = entry->d_name;
-            // Skip "." and ".."
-            if (filename == "." || filename == "..") continue;
-            
-            std::string fullPath = directoryPath + "/" + filename;
-            std::string ssid = readSSIDFromFile(fullPath);
-            if (!ssid.empty()) {
-                // Check if there is enough space in wip for the new SSID
-                size_t length = ssid.length();
-                if (offset + length + 1 < bufferSize) {  // +1 for space or null terminator
-                    std::strcpy(wip + offset, ssid.c_str());
-                    offset += length;
-                    wip[offset++] = ' ';  // Add a space separator
-                } else {
-                    std::cerr << "Buffer too small to hold more SSIDs." << std::endl;
-                    break;
-                }
-            }
-        }
-        closedir(dir);
-        // Null-terminate the buffer
-        if (offset > 0) {
-            wip[offset - 1] = '\0';  // Replace the last space with a null terminator
-        } else {
-            wip[0] = '\0';  // Empty buffer case
-        }
-    } else {
-        std::cerr << "Could not open directory: " << directoryPath << std::endl;
-    }
-}
-
 GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK SETTINGS"), mVersion(window)
 {
 	// MAIN WIFI MENU
@@ -387,17 +336,9 @@ GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK 
 		std::string currentLine;
 		bool destroySelf = false;
 
-		std::string directoryPath = "/etc/NetworkManager/system-connections/";
+		std::string command = "sudo " + wificonnect_path + " --list";
 
-    	processDirectory(directoryPath, wip, sizeof(wip));
-
-    	// Output the SSIDs
-    	std::cout << "SSIDs found:" << std::endl;
-    	std::cout << wip << std::endl;
-
-		// std::string command = "sudo " + wificonnect_path + " --list";
-
-		// wIPP = popen(command.c_str(), "r");
+		wIPP = popen(command.c_str(), "r");
 
 		auto s = new GuiSettings(mWindow, "SAVED NETWORKS");
 

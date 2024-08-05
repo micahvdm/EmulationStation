@@ -127,11 +127,18 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 		}
 		mWindow->pushGui(new GuiMsgBox(mWindow, "Network: " + wifiName + "\n Password: " + ed->getValue(), "Connect", [this, wifiName, ed] {
 			// Quick and dirty just send the info to wificonnect
-			std::string cmdStr = "sudo " + "nmcli device wifi connect '" + wifiName + "' password " + ed->getValue();
+			std::string cmdStr = "sudo " + Utils::FileSystem::getHomePath() + "/.emulationstation/app/wifi/./wificonnect --ssid '" + wifiName + "' --password " + ed->getValue();
 			const char* cmd = cmdStr.c_str();
 
-			system(cmd);
-			mConnected = true;
+			// Make sure wificonnect exists
+			std::string path = Utils::FileSystem::getHomePath() + "/.emulationstation/app/wifi/wificonnect";
+			if (Utils::FileSystem::exists(path)) {
+				system(cmd);
+				mConnected = true;
+			} else {
+				mWindow->pushGui(new GuiMsgBox(mWindow, "wificonnect is missing.  This is used to send wifi info to wpa_supplicant.  This should be in ~/.emulationstation/app/wifi", "OK", nullptr));
+				LOG(LogError) << "WifiConnect: Couldn't find wificonnect in " << path << " folder";
+			}
 
 		},
 
