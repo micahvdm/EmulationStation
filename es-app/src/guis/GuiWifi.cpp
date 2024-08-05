@@ -29,6 +29,7 @@
 #include "components/OptionListComponent.h"
 #include "components/MenuComponent.h"
 #include "guis/GuiTextEditPopup.h"
+#include "guis/GuiTextEditPopupKeyboard.h"
 
 GuiWifi::GuiWifi(Window* window) : GuiComponent(window), mMenu(window, "NETWORK SETTINGS"), mVersion(window)
 {

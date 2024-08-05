@@ -17,6 +17,7 @@
 #include "components/OptionListComponent.h"
 #include "components/MenuComponent.h"
 #include "guis/GuiTextEditPopup.h"
+#include "guis/GuiTextEditPopupKeyboard.h"
 
 GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encrypted) : GuiComponent(window), mMenu(window, "Connect to wifi"), mVersion(window)
 {
@@ -42,7 +43,13 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 			auto updateVal = [ed](const std::string& newVal) { ed->setValue(newVal); }; // ok callback (apply new value to ed)
 
 			// popup the keyboard.
-			mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			if (Settings::getInstance()->getBool("OSK_Enable")) {
+				mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			}
+			else
+			{
+				mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			}
 		});
 	}
 	else {
@@ -52,7 +59,13 @@ GuiWifiConnect::GuiWifiConnect(Window* window, std::string wifiName, bool encryp
 			auto updateVal = [ed](const std::string& newVal) { ed->setValue(newVal); }; // ok callback (apply new value to ed)
 
 			// popup the keyboard.
-			mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			if (Settings::getInstance()->getBool("OSK_Enable")) {
+				mWindow->pushGui(new GuiTextEditPopupKeyboard(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			}
+			else
+			{
+				mWindow->pushGui(new GuiTextEditPopup(mWindow, wifiName + " PASSWORD", ed->getValue(), updateVal, false));
+			}
 		});
 	}
 
