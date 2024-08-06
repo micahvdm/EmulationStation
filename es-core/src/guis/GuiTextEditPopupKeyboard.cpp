@@ -5,7 +5,7 @@
 
 GuiTextEditPopupKeyboard::GuiTextEditPopupKeyboard(Window* window, const std::string& title, const std::string& initValue,
 	const std::function<void(const std::string&)>& okCallback, bool multiLine, const char* acceptBtnText)
-	: GuiComponent(window), mBackground(window, ":/frame.png"), mGrid(window, Vector2i(1, 9)), mMultiLine(multiLine)
+	: GuiComponent(window), mBackground(window, ":/frame.png"), mGrid(window, Vector2i(1, 7)), mMultiLine(multiLine)
 {
 	addChild(&mBackground);
 	addChild(&mGrid);
@@ -183,27 +183,27 @@ bool GuiTextEditPopupKeyboard::input(InputConfig* config, Input input)
 		return true;
 
 	// pressing back when not text editing closes us
-	if (config->isMappedTo("b", input) && input.value)
+	if (config->isMappedTo("B", input) && input.value)
 	{
 		delete this;
 		return true;
 	}
 
 	// For deleting a chara (Left Top Button)
-	if (config->isMappedTo("leftshoulder", input) && input.value) {
+	if (config->isMappedTo("LeftShoulder", input) && input.value) {
 		mText->startEditing();
 		mText->textInput("\b");
 		mText->stopEditing();
 	}
 
 	// For Adding a space (Right Top Button)
-	if (config->isMappedTo("rightshoulder", input) && input.value) {
+	if (config->isMappedTo("RightShoulder", input) && input.value) {
 		mText->startEditing();
 		mText->textInput(" ");
 	}
 
 	// For Shifting (X)
-	if (config->isMappedTo("x", input) && input.value) {
+	if (config->isMappedTo("X", input) && input.value) {
 		if (mShift) mShift = false;
 		else mShift = true;
 		shiftKeys();
@@ -251,9 +251,9 @@ void GuiTextEditPopupKeyboard::shiftKeys() {
 std::vector<HelpPrompt> GuiTextEditPopupKeyboard::getHelpPrompts()
 {
 	std::vector<HelpPrompt> prompts = mGrid.getHelpPrompts();
-	prompts.push_back(HelpPrompt("x", "SHIFT"));
-	prompts.push_back(HelpPrompt("b", "back"));
-	prompts.push_back(HelpPrompt("r", "SPACE"));
-	prompts.push_back(HelpPrompt("l", "DELETE"));
+	prompts.push_back(HelpPrompt("X", "SHIFT"));
+	prompts.push_back(HelpPrompt("B", "back"));
+	prompts.push_back(HelpPrompt("R", "SPACE"));
+	prompts.push_back(HelpPrompt("L", "DELETE"));
 	return prompts;
 }
